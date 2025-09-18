@@ -1,10 +1,17 @@
 import { createApp } from 'vue'
-import './style.css'
+import { createPinia } from 'pinia'
 import App from './App.vue'
 
-createApp(App).mount('#app').$nextTick(() => {
-  // Use contextBridge
-  window.ipcRenderer.on('main-process-message', (_event, message) => {
-    console.log(message)
-  })
+import './assets/css/style.css'
+
+const app = createApp(App)
+app.use(createPinia())
+
+app.mount('#app').$nextTick(() => {
+    // Keep sample event logger
+    if (window.ipcRenderer) {
+        window.ipcRenderer.on('main-process-message', (_event: any, message: string) => {
+            console.log(message)
+        })
+    }
 })

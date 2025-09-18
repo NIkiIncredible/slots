@@ -24,4 +24,12 @@ declare namespace NodeJS {
 // Used in Renderer process, expose in `preload.ts`
 interface Window {
   ipcRenderer: import('electron').IpcRenderer
+  gcm: {
+    saveProject: (cfg: unknown) => Promise<boolean>
+    loadProject: () => Promise<any>
+    exportProject: (cfg?: unknown) => Promise<boolean>
+    importProject: () => Promise<any>
+    onBuzzer: (cb: () => void) => void
+    offBuzzer: (cb: () => void) => void
+  }
 }
